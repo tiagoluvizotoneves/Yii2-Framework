@@ -7,41 +7,76 @@ $this->title = 'Teste de CRUD';
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Teste de CRUD via API</h1>
+        <h1>Projeto Yii2 Framework Teste</h1>
+        <p>Este repositório contém o código para um teste de desenvolvimento utilizando o Yii2 Framework, configurado para funcionar dentro de containers Docker.</p>
     </div>
 
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-12">
+            <h2>Requisitos Obrigatórios</h2>
+            <ul>
+                <li>PHP 7.1</li>
+                <li>Composer versão 1.10</li>
+                <li>MySQL 8</li>
+                <li>Uso de JSON para o corpo na API</li>
+            </ul>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+            <h2>Requisitos Desejáveis</h2>
+            <ul>
+                <li>Uso de Docker para execução</li>
+                <li>Dockerfile incluindo todas as dependências necessárias</li>
+                <li>Estruturação do código com boas práticas</li>
+                <li>Uso de conceitos atuais de desenvolvimento</li>
+                <li>Projeto disponibilizado em repositório Git</li>
+                <li>Uso de migrations do Yii2 para configuração da base de dados</li>
+            </ul>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <h2>Configuração e Execução</h2>
+            <h3>Primeiro acesso e construção do ambiente</h3>
+            <pre><code>docker compose up --build -d</code></pre>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+            <h3>Subir o ambiente Docker</h3>
+            <pre><code>docker compose up -d</code></pre>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <h3>Desligar o ambiente Docker</h3>
+            <pre><code>docker compose down</code></pre>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+            <h3>Executar Migrations</h3>
+            <pre><code>docker exec -it yii2-framework-web-1 php /var/www/html/yii migrate --interactive=0</code></pre>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            <h3>Criar Usuário via Terminal</h3>
+            <pre><code>docker exec -it yii2-framework-web-1 php /var/www/html/yii user/create username password "name"</code></pre>
+
+            <h2>Uso da API</h2>
+            <p>A API pode ser acessada através do seguinte link de collection do Postman, que inclui exemplos de requisições para todas as funcionalidades implementadas:</p>
+            <p><a href="https://www.postman.com/tiagoluvizotoneves/workspace/yii2-framework-test-1/overview" target="_blank">https://www.postman.com/tiagoluvizotoneves/workspace/yii2-framework-test-1/overview</a></p>
+
+            <h2>Funcionalidades Implementadas</h2>
+            <h3>Autenticação</h3>
+            <p><strong>Endpoint:</strong> <code>POST /auth/login</code></p>
+            <p><strong>Descrição:</strong> Autentica o usuário e retorna um token JWT para acesso às APIs protegidas.</p>
+
+            <h3>Cadastro de Cliente Básico</h3>
+            <p><strong>Endpoint:</strong> <code>POST /clients</code></p>
+            <p><strong>Descrição:</strong> Cadastra um novo cliente no sistema com validação de CPF e dados de endereço.</p>
+
+            <h3>Lista de Clientes</h3>
+            <p><strong>Endpoint:</strong> <code>GET /clients/page</code></p>
+            <p><strong>Descrição:</strong> Lista os clientes cadastrados com suporte a paginação.</p>
+
+            <h3>Lista de Produtos</h3>
+            <p><strong>Endpoint:</strong> <code>GET /products</code></p>
+            <p><strong>Descrição:</strong> Lista os produtos cadastrados com suporte a paginação e filtro por cliente.</p>
+
+            <h2>Desenvolvimento</h2>
+            <p>Este projeto foi desenvolvido seguindo as melhores práticas atuais de desenvolvimento de software, utilizando o framework Yii2 para garantir uma estrutura robusta e escalável.</p>
+
+            <h2>Contribuição</h2>
+            <p>Contribuições para o projeto são bem-vindas. Para contribuir, por favor, clone o repositório, faça suas alterações e submeta um pull request.</p>
+
+
             </div>
         </div>
 

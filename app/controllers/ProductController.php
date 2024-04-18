@@ -12,8 +12,18 @@ use yii\web\UploadedFile;
 
 class ProductController extends ActiveController
 {
+    /**
+     * Especifica a classe do modelo associada a este controlador.
+     * A classe do modelo define a estrutura de dados e é usada pelas ações CRUD.
+     */
     public $modelClass = 'app\models\Product';
 
+    /**
+     * Configura comportamentos que este controlador deve usar.
+     * 'authenticator' configura a autenticação JWT Http Bearer para proteger os endpoints da API.
+     *
+     * @return array a configuração dos comportamentos.
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -26,6 +36,12 @@ class ProductController extends ActiveController
         return $behaviors;
     }
 
+    /**
+     * Personaliza as ações padrão do ActiveController.
+     * Desativa ações de 'delete' e 'create' padrões para usar as personalizadas.
+     *
+     * @return array as ações configuradas.
+     */
     public function actions()
     {
         $actions = parent::actions();
@@ -33,6 +49,12 @@ class ProductController extends ActiveController
         return $actions;
     }
 
+    /**
+     * Ação para criar um novo produto.
+     * Verifica autenticação, carrega dados, valida o cliente, processa upload de foto e salva o produto.
+     *
+     * @return yii\web\Response a resposta da API em formato JSON.
+     */
     public function actionCreate()
     {
         if (!Yii::$app->user->identity) {
@@ -70,6 +92,12 @@ class ProductController extends ActiveController
         }
     }
 
+    /**
+     * Ação para listar produtos de forma paginada.
+     * Verifica autenticação e aplica filtros de cliente, se fornecidos.
+     *
+     * @return yii\web\Response a resposta da API em formato JSON com produtos paginados.
+     */
     public function actionListPaginated()
     {
         if (!Yii::$app->user->identity) {

@@ -54,11 +54,14 @@ Após executar as migrations, é possível criar um usuário através do termina
 ```bash
 docker exec -it yii2-framework-web-1 php /var/www/html/yii user/create <username> <password> "<name>"
 ```
+<username>: Nome de usuário desejado para o login.
+<password>: Senha para o usuário.
+<name>: Nome completo do usuário.
 
 ## Uso da API
 A API pode ser acessada através do seguinte link de collection do Postman, que inclui exemplos de requisições para todas as funcionalidades implementadas:
 
-[Collection do Postman](https://www.postman.com/tiagoluvizotoneves/workspace/yii2-framework-test-1/overview)
+[https://www.postman.com/tiagoluvizotoneves/workspace/yii2-framework-test-1/overview](https://www.postman.com/tiagoluvizotoneves/workspace/yii2-framework-test-1/overview)
 
 Este link inclui todos os detalhes necessários para testar as funcionalidades da API, incluindo a autenticação e criação de usuários.
 

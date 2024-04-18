@@ -11,8 +11,18 @@ use yii\web\UploadedFile;
 
 class ClientController extends ActiveController
 {
+    /**
+     * Define a classe modelo para este controlador.
+     * Especifica que as operações CRUD serão baseadas no modelo 'Client'.
+     */
     public $modelClass = 'app\models\Client';
 
+    /**
+     * Configura comportamentos adicionais para este controlador, além dos padrões do ActiveController.
+     * Configura autenticação JWT para todas as ações, usando JWT Http Bearer Auth.
+     *
+     * @return array Configurações de comportamento modificado.
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -25,6 +35,12 @@ class ClientController extends ActiveController
         return $behaviors;
     }
 
+    /**
+     * Personaliza as ações padrão do ActiveController.
+     * Remove as ações 'delete' e 'create' para serem substituídas por implementações personalizadas.
+     *
+     * @return array Configuração modificada das ações.
+     */
     public function actions()
     {
         $actions = parent::actions();
@@ -32,6 +48,12 @@ class ClientController extends ActiveController
         return $actions;
     }
 
+    /**
+     * Ação para criar um novo cliente.
+     * Valida autenticação, carrega dados do POST, verifica se o CPF já está cadastrado, faz upload de foto e salva o cliente.
+     *
+     * @return yii\web\Response Resposta da API em formato JSON.
+     */
     public function actionCreate()
     {
         if (!Yii::$app->user->identity) {
@@ -73,6 +95,12 @@ class ClientController extends ActiveController
         }
     }
 
+    /**
+     * Ação para listar clientes de forma paginada.
+     * Valida autenticação e retorna uma lista paginada de clientes.
+     *
+     * @return yii\web\Response Resposta da API em formato JSON com lista paginada de clientes.
+     */
     public function actionListPaginated()
     {
         if (!Yii::$app->user->identity) {
