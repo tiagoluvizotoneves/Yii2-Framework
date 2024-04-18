@@ -25,30 +25,35 @@ Para construir e subir o ambiente pela primeira vez, execute:
 
 ```bash
 docker compose up --build -d
+```
 
 ### Subir o ambiente Docker
 Para subir o ambiente sem reconstruir:
 
 ```bash
 docker compose up -d
+```
 
 ### Desligar o ambiente Docker
 Para desligar o ambiente:
 
 ```bash
 docker compose down
+```
 
 ### Executar Migrations
 Para rodar as migrations e configurar o banco de dados:
 
 ```bash
 docker exec -it yii2-framework-web-1 php /var/www/html/yii migrate --interactive=0
+```
 
 ### Criar Usuário via Terminal
 Após executar as migrations, é possível criar um usuário através do terminal para acessar as funcionalidades da API que requerem autenticação. Utilize o seguinte comando para criar um novo usuário:
 
 ```bash
 docker exec -it yii2-framework-web-1 php /var/www/html/yii user/create <username> <password> "<name>"
+```
 
 ## Uso da API
 A API pode ser acessada através do seguinte link de collection do Postman, que inclui exemplos de requisições para todas as funcionalidades implementadas:
