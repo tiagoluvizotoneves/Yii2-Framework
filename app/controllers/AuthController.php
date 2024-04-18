@@ -23,22 +23,28 @@
         {
             $username = Yii::$app->request->post('username');
             $password = Yii::$app->request->post('password');
-    
+
             $user = User::findOne(['username' => $username]);
             if ($user && $user->validatePassword($password)) {
                 $jwt = Yii::$app->jwt;
                 $token = $jwt->getBuilder()
-                             ->setIssuedAt(time())
-                             ->setExpiration(time() + 3600) // Token expira em 1 hora
-                             ->set('uid', $user->id)
-                             ->getToken($jwt->getSigner('HS256'), $jwt->getKey());
+                            ->setIssuedAt(time())
+                            ->setExpiration(time() + 3600) // Token expira em 1 hora
+                            ->set('uid', $user->id)
+                            ->getToken($jwt->getSigner('HS256'), $jwt->getKey());
                 
-                return $this->asJson([
-                    'token' => (string) $token
-                ]);
+                $user->access_token = (string) $token;
+                if ($user->save()) {
+                    return $this->asJson([
+                        'token' => $user->access_token
+                    ]);
+                } else {
+                    return $this->asJson(['error' => 'Failed to save the access token']);
+                }
             } else {
                 Yii::$app->response->statusCode = 401;
-                return $this->asJson(['error' => 'Unauthorized']);
+                return $this->asJson(['error' => 'Credenciais inválidas. Verifique seu nome de usuário e senha e tente novamente.']);
             }
         }
+
     }    

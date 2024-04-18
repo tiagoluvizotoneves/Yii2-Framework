@@ -31,9 +31,7 @@ class User extends ActiveRecord implements IdentityInterface
     // Encontra uma identidade pelo token de acesso dado.
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        // Implemente a lógica para verificar o token aqui
-        // Exemplo: return static::findOne(['access_token' => $token]);
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token]);
     }
 
     public function getId()
@@ -43,16 +41,17 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getAuthKey()
     {
-        // Aqui você deveria retornar uma chave usada para verificação de sessão
-        // Exemplo: return $this->auth_key;
-        throw new NotSupportedException('"getAuthKey" is not implemented.');
+        return $this->auth_key;
     }
 
     public function validateAuthKey($authKey)
     {
-        // Aqui você compara a authKey fornecida com a armazenada
-        // Exemplo: return $this->getAuthKey() === $authKey;
-        throw new NotSupportedException('"validateAuthKey" is not implemented.');
+        return $this->getAuthKey() === $authKey;
+    }
+
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
     public function validatePassword($password)

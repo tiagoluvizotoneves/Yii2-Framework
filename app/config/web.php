@@ -15,17 +15,23 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '9u-stuTZp7BNQkEzZdhOJ6jZNCH9LpUf',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],
+        'response' => [
+            'format' => yii\web\Response::FORMAT_JSON,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
         ],
         'jwt' => [
             'class' => \sizeg\jwt\Jwt::class,
-            'key' => '9C5YBg54jjbaKVxRPIiTjsq7iKseN14LTe0EfXolWSM=',  // Substitua por uma chave secreta real
+            'key' => '9C5YBg54jjbaKVxRPIiTjsq7iKseN14LTe0EfXolWSM=',  
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -51,9 +57,14 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'site/index',
                 'auth/login' => 'auth/login',
+                'POST clients' => 'client/create',
+                'GET clients/page' => 'client/list-paginated',
+                'POST products' => 'product/create',
+                'GET products/page' => 'product/list-paginated',
             ],
-        ],
+        ],        
     ],
     'params' => $params,
 ];
